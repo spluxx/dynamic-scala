@@ -43,3 +43,27 @@ resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repos
 testFrameworks += new TestFramework("org.scalameter.ScalaMeterFramework")
 parallelExecution in Test := false
 
+lazy val Benchmark = config("bench") extend Test
+
+lazy val scalaMeterFramework = new TestFramework("org.scalameter.ScalaMeterFramework")
+
+lazy val basic = Project(
+  "basic-with-separate-config",
+  file("."),
+  settings = Defaults.coreDefaultSettings ++ Seq(
+    name := "Dynamic-Scala-Benchmark",
+    scalaVersion := "2.12.2",
+    libraryDependencies ++= Seq(
+      "com.storm-enroute" %% "scalameter" % "0.9-SNAPSHOT" % "bench"
+    ),
+    resolvers ++= Seq(
+      "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+    ),
+    testFrameworks in ThisBuild += scalaMeterFramework,
+    parallelExecution in Benchmark := false,
+    logBuffered := false,
+    testOptions in ThisBuild += Tests.Argument(scalaMeterFramework, "-silent")
+  )
+) configs Benchmark settings {
+  inConfig(Benchmark)(Defaults.testSettings): _*
+}
