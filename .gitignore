@@ -1,0 +1,5 @@
+.S_Store
+.idea
+.xml
+*.log
+target
