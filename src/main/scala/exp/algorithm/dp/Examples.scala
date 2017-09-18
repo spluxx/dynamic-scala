@@ -1,20 +1,27 @@
 package exp.algorithm.dp
 
-import exp.category.datatype.State
-import exp.category.datatype.StateT.State
-import exp.category.Implicits._
+import exp.algorithm._
 
 object Examples {
-  def fib(n: Int): State[Map[Int, BigInt], BigInt] = State { s =>
-    s.get(n) match {
-      case Some(r) => (s, r)
-      case None =>
-        val res = (for {
-          a <- fib(n-1)
-          b <- fib(n-2)
-        } yield a + b).eval(s)
-        (res._1.+(n -> res._2), res._2)
+  def fib(n: Int): BigInt = {
+    init(
+      Map(
+        0 -> BigInt(1),
+        1 -> BigInt(1)
+      )
+    ).loop(2 to n) { (map, i) =>
+      map.+((i, map(i-1)+map(i-2)))
+    }(n)
+  }
+
+  def isPrime(p: Int): Boolean = {
+    init(
+      true
+    ).loop(2 to Math.sqrt(p).toInt) { (q, i) =>
+      q && !(p % i == 0)
     }
   }
+
+
 }
 

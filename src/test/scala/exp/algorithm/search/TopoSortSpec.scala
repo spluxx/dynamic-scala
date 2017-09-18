@@ -11,18 +11,17 @@ import scala.language.higherKinds
 
 class TopoSortSpec extends FlatSpec with Matchers {
   def check[G[_, _], I, W](gr: G[I, W], answer: List[I])(implicit graph: Graph[G, I, W]): Boolean = {
-    val vis: mutable.ArrayBuffer[Boolean] = mutable.ArrayBuffer().++=(List.fill(gr.nodes.size)(false))
+    val vis: mutable.ArrayBuffer[Boolean] = mutable.ArrayBuffer.fill(gr.nodes.size)(false)
     val mapper = gr.nodes.foldLeft((0, Map.empty[I, Int])) { (p, node) =>
       (p._1+1, p._2.+(node.index -> p._1))
     }._2
 
+    gr.nodes.size == answer.size &&
     (for {
       elm <- answer
     } yield {
       val isEveryChildVisisted = gr(elm).succ.forall(child => vis(mapper(child._1.index)))
-
       if (isEveryChildVisisted) vis.update(mapper(elm), true)
-
       isEveryChildVisisted
     }).forall(identity)
   }

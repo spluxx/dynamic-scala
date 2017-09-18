@@ -7,6 +7,8 @@ trait DirectedGraph[@specialized(Int) I, W] {
   def nodeMap: Map[I, NodeCtx[I, W]]
   def apply(index: I): NodeCtx[I, W] = nodeMap(index)
   def isEmpty: Boolean = nodeMap.isEmpty
+
+  override def toString: String = nodes.map(node => nodeMap(node.index)).mkString("\n")
 }
 
 object DirectedGraph {
