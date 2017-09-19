@@ -14,9 +14,9 @@ trait MaxFlow {
     source: I,
     sink: I
     )(implicit graph: Graph[G, I, W]): (G[I, W], W) = {
+
     def num: Numeric[W] = implicitly[Numeric[W]]
     def cmp(w1: W, w2: W): Int = num.compare(w1, w2)
-
     val mapper = nodes.distinct.map(_.index).zipWithIndex.toMap
     implicit def injectiveIndexToInt(i: I): Int = mapper(i)
 
@@ -35,26 +35,28 @@ trait MaxFlow {
         num.zero
       ).loop { (cap, maxFlow) =>
         val pathFinder =
-          init(Map(source -> true).withDefault(_ => false), Queue(source), List((source, source, num.zero)))
-            .loop { (visited, queue, col) =>
-              if (queue.size <= 0 || queue.head == sink) Stop
-              else {
-                val (head, tails) = queue.dequeue
-                val canGoto =
-                  nodes.filter { next =>
-                    !visited(next.index) &&
-                    cmp(cap(head)(next.index), num.zero) > 0
-                  }.map { next =>
-                    (next.index, cap(head)(next.index))
-                  }
+          init(
+            Map(source -> true).withDefault(_ => false),
+            Queue(source),
+            List((source, source, num.zero))
+          ).loop { (visited, queue, col) =>
+            if (queue.size <= 0 || queue.head == sink) Stop
+            else {
+              val (head, tails) = queue.dequeue
+              val canGoto =
+                nodes.filter { next =>
+                  !visited(next.index) && cmp(cap(head)(next.index), num.zero) > 0
+                }.map { next =>
+                  (next.index, cap(head)(next.index))
+                }
 
-                Next(
-                  visited.++(canGoto.map(_._1 -> true)),
-                  tails.enqueue(canGoto.map(_._1)),
-                  canGoto.map(next => (head, next._1, next._2)) ::: col
-                )
-              }
+              Next(
+                visited.++(canGoto.map(_._1 -> true)),
+                tails.enqueue(canGoto.map(_._1)),
+                canGoto.map(next => (head, next._1, next._2)) ::: col
+              )
             }
+          }
 
         if (!pathFinder._1(sink)) Stop
         else {

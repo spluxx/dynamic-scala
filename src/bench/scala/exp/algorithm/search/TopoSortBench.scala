@@ -5,6 +5,7 @@ import org.scalameter.picklers.noPickler._
 
 import exp.structure.typeclass.{Edge, Node}
 import exp.structure.Implicits.directedGraph
+import exp.algorithm.graph._
 
 import scala.collection.mutable
 import scala.io.Source
