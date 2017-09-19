@@ -54,6 +54,7 @@ The type signature is(disregarding syntactical components) basically a `fold` as
 T => TraversableOnce[U] => ((T, U) => T) => T
 ```
 <br>
-The efficiency now depends solely on the datastructure to represent the state, and it is TBD.
+The efficiency now depends solely on the datastructure to represent the state, and it is TBD. <br>
+
 ### References
 https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf - Okasaki's monumental paper on purely functional data structures
