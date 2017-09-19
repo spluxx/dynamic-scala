@@ -26,7 +26,8 @@ Deterministic algorithms, the subject of this project, require meticulous state 
 <br>
 <br>
 Hence the `FoldExtension`. <br>
-It encapsulates the imperative style within a functional context, in a performant and comprehensive way.
+It encapsulates the imperative style within a functional context, in a performant and comprehensive way.<br>
+##### loop on "collections"
 ```C++
 // (1) Declare initial state values
 int fibHead = 1;
@@ -49,6 +50,30 @@ val (fibTail, fibHead): (Int, Int) =
       (fibHead, fibHead+fibTail)
     }
 ```
+##### loop until Break
+```C++
+// (1) Declare initial state values
+double sq = square;
+double sqrt = 1.0;
+// (2) loop
+while(true) {
+// (3) Update State on each loop, until break is reached
+  if(abs((sqrt*sqrt-sq)/sq) > 1e-6) sqrt = ((sq/sqrt)+sqrt)/2;
+  else break;
+}
+```
+```scala
+val (sq, sqrt) = 
+// (1) Declare initial state values
+  init(square, 1.0)
+// (2) loop  
+    .loop { (x, y) =>
+// (3) Update State on each loop, until break is reached
+      if(math.abs((y*y-x)/x) > 1e-6) Next(x, ((x/y)+y)/2)
+      else Break
+    }
+```
+
 The type signature is(disregarding syntactical components) basically a `fold` as the name suggests.
 ```scala
 T => TraversableOnce[U] => ((T, U) => T) => T
