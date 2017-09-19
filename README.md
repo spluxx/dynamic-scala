@@ -26,7 +26,7 @@ Deterministic algorithms, the subject of this project, require meticulous state 
 <br>
 <br>
 Hence the `FoldExtension`. <br>
-It encapsulates imperative style within a functional context, in a performant and comprehensive way.
+It encapsulates the imperative style within a functional context, in a performant and comprehensive way.
 ```C++
 // (1) Declare initial state values
 int fibHead = 1;
