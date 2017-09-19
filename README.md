@@ -26,7 +26,7 @@ Deterministic algorithms, the subject of this project, require meticulous state 
 <br>
 <br>
 Hence the `FoldExtension`. <br>
-It encapsulates imperative style within a functional context.
+It encapsulates imperative style within a functional context, in a performant and comprehensive way.
 ```C++
 // (1) Declare initial state values
 int fibHead = 1;
@@ -54,7 +54,7 @@ The type signature is(disregarding syntactical components) basically a `fold` as
 T => TraversableOnce[U] => ((T, U) => T) => T
 ```
 <br>
-The efficiency now depends solely on the datastructure to represent the state, and it is TBD. <br>
+FoldExtension has basically zero overhead(debatable), and the efficiency of the implementation depends solely on the datastructure representing the state, and it is TBD. <br>
 
 ### References
 https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf - Okasaki's monumental paper on purely functional data structures
