@@ -54,7 +54,7 @@ The type signature is(disregarding syntactical components) basically a `fold` as
 T => TraversableOnce[U] => ((T, U) => T) => T
 ```
 <br>
-FoldExtension has basically zero overhead(debatable), and the efficiency of the implementation depends solely on the datastructure representing the state, and it is TBD. <br>
+FoldExtension has basically zero overhead(... debatable), and the efficiency of the implementation depends solely on the datastructure representing the state, and it is TBD. <br>
 
 ### References
 https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf - Okasaki's monumental paper on purely functional data structures
