@@ -12,7 +12,7 @@ Every implementation will be followed by correctness test and microbenchmarking 
 [ScalaTest](https://github.com/scalatest/scalatest) and
 [ScalaMeter](https://github.com/scalameter/scalameter))
 
-### Why FoldExtension 
+### FoldExtension 
 An unrefined but insightful reasoning behind the creation of `FoldExtension` is that 
 <br> 
 **(1)** all programs for execution are, at the very bottom, a function `State => (State, Result)` and hence 
