@@ -22,7 +22,7 @@ An unrefined but insightful reasoning behind the creation of `FoldExtension` is 
 **(3)** It's not so much about which language is better than another, but about being able to project one's perception of the problem *soundly* onto the target language. 
 <br>
 <br>
-Deterministic algorithms, the subject of this project, require meticulous state manipulations in its very nature. The dryness of [this](https://github.com/vkostyukov/scalacaster) popular open-source project just shows how difficult it is to devise a purely functional algorithm and its associated data structure that is intellectually pleasing yet still performant.
+Deterministic algorithms, the subject of this project, require meticulous state manipulations in its very nature. The dryness of [this](https://github.com/vkostyukov/scalacaster) popular open-source project just shows how difficult it is to devise a purely functional algorithm and its associated data structure that is intellectually pleasing and yet, still performant.
 <br>
 <br>
 Hence the `FoldExtension`. <br>
