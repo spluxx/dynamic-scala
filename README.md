@@ -50,6 +50,10 @@ val (fibTail, fibHead): (Int, Int) =
       (fibHead, fibHead+fibTail)
     }
 ```
+The type signature is(disregarding syntactical components) equivalent to that of `fold`.
+```scala
+T => TraversableOnce[U] => ((T, U) => T) => T
+```
 ##### loop until Break
 ```C++
 // (1) Declare initial state values
@@ -73,13 +77,18 @@ val (sq, sqrt) =
       else Break
     }
 ```
-
-The type signature is(disregarding syntactical components) basically a `fold` as the name suggests.
+The type signature is(disregarding syntactical components) `T => (T => Control[T]) => T`
 ```scala
-T => TraversableOnce[U] => ((T, U) => T) => T
+def recurse[T](t: T)(f: T => Control[T]): T = {
+  f(t) match {
+    case Next(nt) => recurse(nt)(f)
+    case Break => t
+  }
+}
 ```
+
 <br>
-FoldExtension has basically zero overhead(... debatable), and the efficiency of the implementation depends solely on the datastructure representing the state, and it is TBD. <br>
+FoldExtension has zero overhead, and the efficiency of the implementation depends solely on the datastructure representing the state, and it is TBD. <br>
 
 ### References
 https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf - Okasaki's monumental paper on purely functional data structures
