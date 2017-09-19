@@ -58,3 +58,6 @@ FoldExtension has basically zero overhead(... debatable), and the efficiency of 
 
 ### References
 https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf - Okasaki's monumental paper on purely functional data structures
+
+### Note
+ANY feedbacks are more than welcome. ih33@duke.edu
