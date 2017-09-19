@@ -17,7 +17,7 @@ An unrefined but insightful reasoning behind the creation of `FoldExtension` is 
 <br> 
 **(1)** all programs for execution are, at the very bottom, a function `State => (State, Result)` and hence 
 <br>
-**(2)** imperative and functional paradigms differ not in their problem/solution space but in their intepretation, representation of programs implied by their vocabularies and idioms. 
+**(2)** imperative and functional paradigms differ not in their problem/solution space but in their intepretation, representation of programs implied by their syntax, idioms, and toolkits. 
 <br> 
 **(3)** It's not so much about which language is better than another, but about being able to project one's perception of the problem *soundly* onto the target language. 
 <br>
