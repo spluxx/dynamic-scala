@@ -1,9 +1,11 @@
 package exp.algorithm.search
 
 import org.scalatest.{FlatSpec, Matchers}
+
 import exp.structure.typeclass.{Edge, Graph, Node}
 import exp.structure.typeclass.Graph._
 import exp.structure.Implicits.directedGraph
+import exp.algorithm.graph._
 
 import scala.collection.mutable
 import scala.io.Source

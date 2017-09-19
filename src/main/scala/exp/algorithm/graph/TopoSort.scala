@@ -10,7 +10,8 @@ trait TopoSort {
   def topoSort[I, G[_, _]](
     nodes: List[Node[I]],
     edges: List[Edge[I, Unit]]
-    )(implicit graph: Graph[G, I, Unit]): List[I] = {
+    )(implicit graph
+    : Graph[G, I, Unit]): List[I] = {
 
     val G = Graph.makeGraph(nodes, edges)
 
@@ -24,7 +25,7 @@ trait TopoSort {
       initialOutSize,
       initialLeaves,
       initialLeaves
-    ).loopTilBreak { (outCount, leaves, sorted) =>
+    ).loop { (outCount, leaves, sorted) =>
 
       init(
         outCount,
@@ -36,7 +37,7 @@ trait TopoSort {
           case r => (outCountAux.updated(parent, r - 1), newLeaves, sortedAux)
         }
       } match {
-        case (_, Nil, _) => Break
+        case (_, Nil, _) => Stop
         case (cnt, xs, srt) => Next(cnt, xs, srt)
       }
 
