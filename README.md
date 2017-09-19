@@ -13,7 +13,7 @@ Every implementation will be followed by correctness test and microbenchmarking 
 [ScalaMeter](https://github.com/scalameter/scalameter))
 
 ### Why FoldExtension 
-An unrefined reasoning behind the creation of `FoldExtension` is that 
+An unrefined but insightful reasoning behind the creation of `FoldExtension` is that 
 <br> 
 **(1)** all programs for execution are, at the very bottom, a function `State => (State, Result)` and hence 
 <br>
@@ -22,13 +22,38 @@ An unrefined reasoning behind the creation of `FoldExtension` is that
 **(3)** It's not so much about which language is better than another, but about being able to project one's perception of the problem soundly onto the language.
 <br>
 <br>
-Deterministic algorithms are extremely low-entropy composition of `State => (State, Result)` function in a sense that they (psychotically) minimize and organize the domain in a principled way, until just enough composition is done to produce the answer. It is evident that meticulous state manipulations are required in its very nature.
+Deterministic algorithms, the subject of this project, require meticulous state manipulations in its very nature. The dryness of [this](https://github.com/vkostyukov/scalacaster) popular open-source project just shows how difficult it is to devise a purely functional algorithm and its associated data structure that is intellectually pleasing yet still performant.
 <br>
 <br>
-Doing so in idiomatic Scala isn't as easy nor efficient. The dryness of [this](https://github.com/vkostyukov/scalacaster) popular open-source project just shows how difficult it is to devise a purely functional algorithm that is asthetically pleasing yet still performant.
+Hence the `FoldExtension`. <br>
+It encapsulates imperative style within a functional context.
+```C++
+// (1) Declare initial state values
+int fibHead = 1;
+int fibTail = 1;
+// (2) Declare what to loop on
+for(int i = 2 ; i <= N ; i ++) {
+// (3) Update State on each loop
+  int t = fibHead;
+  fibHead += fibTail;
+  fibTail = t;
+}
+```
+```scala
+val (fibTail, fibHead): (Int, Int) = 
+// (1) Declare initial state values
+  init(1, 1)
+// (2) Declare what to loop on
+    .loop(2 to N) { (fibTail, fibHead, _) =>
+// (3) Update State on each loop
+      (fibHead, fibHead+fibTail)
+    }
+```
+The type signature is(disregarding syntactical components) basically a `fold` as the name suggests.
+```scala
+T => TraversableOnce[U] => ((T, U) => T) => T
+```
 <br>
-<br>
-TBD
-
+The efficiency now depends solely on the datastructure to represent the state, and it is TBD.
 ### References
 https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf - Okasaki's monumental paper on purely functional data structures
