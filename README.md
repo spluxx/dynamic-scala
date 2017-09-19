@@ -26,7 +26,7 @@ Deterministic algorithms, the subject of this project, require meticulous state 
 <br>
 <br>
 Hence the `FoldExtension`. <br>
-It encapsulates the imperative style within a functional context, in a performant and comprehensive way.<br>
+It encapsulates a small snippet of imperative style code within a functional context in a performant and comprehensive way.<br> *Note: State monads should be prefered when devising a set of composable state operations, On the other hand, FoldExtension is effective with handling local state-intensive tasks)<br>
 ##### loop over collections
 ```C++
 // (1) Declare initial state values
