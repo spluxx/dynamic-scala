@@ -37,7 +37,7 @@ trait TopoSort {
           case r => (outCountAux.updated(parent, r - 1), newLeaves, sortedAux)
         }
       } match {
-        case (_, Nil, _) => Stop
+        case (_, Nil, _) => Break
         case (cnt, xs, srt) => Next(cnt, xs, srt)
       }
 

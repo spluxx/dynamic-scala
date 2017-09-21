@@ -12,16 +12,8 @@ trait Monad[F[_]] extends Functor[F] {
 object Monad {
   def pure[T, M[_]: Monad](t: T): M[T] = implicitly[Monad[M]].pure(t)
 
-  trait Ops[M[_], A] {
-    def target: M[A]
-    def tcInstance: Monad[M]
-
-    def map[B](f: A => B): M[B] = tcInstance.map(target)(f)
-    def flatMap[B](f: A => M[B]): M[B] = tcInstance.flatMap(target)(f)
-  }
-
-  implicit def monadOps[A, M[_]: Monad](tg: M[A]): Ops[M, A] = new Ops[M, A] {
-    override def target: M[A] = tg
-    override def tcInstance: Monad[M] = implicitly[Monad[M]]
+  implicit class monadOps[A, M[_]: Monad](target: M[A]) {
+    def map[B](f: A => B): M[B] = implicitly[Monad[M]].map(target)(f)
+    def flatMap[B](f: A => M[B]): M[B] = implicitly[Monad[M]].flatMap(target)(f)
   }
 }

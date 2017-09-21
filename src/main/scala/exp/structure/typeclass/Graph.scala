@@ -27,18 +27,9 @@ object Graph extends GraphTypeClass {
 }
 
 trait GraphTypeClass {
-  trait GraphOps[G[_, _], I, W] {
-    def tcInstance: Graph[G, I, W]
-    def target: G[I, W]
-
-    def isEmpty: Boolean = tcInstance.isEmpty(target)
-    def apply(index: I): NodeCtx[I, W] = tcInstance(target)(index)
-    def nodes: List[Node[I]] = tcInstance.nodes(target)
+  implicit class graphToGraphOps[G[_, _], I, W](target: G[I, W])(implicit graph: Graph[G, I, W]) {
+    def isEmpty: Boolean = graph.isEmpty(target)
+    def apply(index: I): NodeCtx[I, W] = graph.apply(target)(index)
+    def nodes: List[Node[I]] = graph.nodes(target)
   }
-
-  implicit def graphToGraphOps[G[_, _], I, W](tg: G[I, W])(implicit graph: Graph[G, I, W]): GraphOps[G, I, W] =
-    new GraphOps[G, I, W] {
-      def tcInstance: Graph[G, I, W] = graph
-      def target: G[I, W] = tg
-    }
 }

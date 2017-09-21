@@ -40,7 +40,7 @@ trait MaxFlow {
             Queue(source),
             List((source, source, num.zero))
           ).loop { (visited, queue, col) =>
-            if (queue.size <= 0 || queue.head == sink) Stop
+            if (queue.size <= 0 || queue.head == sink) Break
             else {
               val (head, tails) = queue.dequeue
               val canGoto =
@@ -58,7 +58,7 @@ trait MaxFlow {
             }
           }
 
-        if (!pathFinder._1(sink)) Stop
+        if (!pathFinder._1(sink)) Break
         else {
           val extractedPath =
             pathFinder._3.foldLeft(sink, List((sink, sink, num.zero))) { case ((next, path), (from, to, c)) =>

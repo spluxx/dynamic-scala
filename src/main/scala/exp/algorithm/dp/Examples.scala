@@ -22,6 +22,27 @@ object Examples {
     }
   }
 
+  def sqrt(square: Double): Double = {
+    init(
+      square,
+      1.0
+    ).loop { (x, y) =>
+      if(math.abs((y*y-x)/x) > 1e-6) Next(x, ((x/y)+y)/2)
+      else Break
+    }._2
+  }
 
+  def binSearch(list: Vector[Int], find: Int): Int = {
+    init(
+      0, list.length
+    ).loop { (l, r) =>
+      if (l >= r) Break
+      else {
+        val m = (l & r) + ((l ^ r) >> 1)
+        if (list(m) < find) Next(m + 1, r)
+        else Next(l, m)
+      }
+    }._2
+  }
 }
 
