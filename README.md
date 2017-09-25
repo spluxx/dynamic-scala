@@ -13,15 +13,6 @@ Every implementation will be followed by correctness test and microbenchmarking 
 [ScalaMeter](https://github.com/scalameter/scalameter))
 
 ### FoldExtension 
-An unrefined but insightful reasoning behind the creation of `FoldExtension` is that 
-<br> 
-**(1)** all programs for execution are, at the very bottom, a function `State => (State, Result)` and hence 
-<br>
-**(2)** imperative and functional paradigms differ not in their problem/solution space but in their intepretation, representation of programs implied by their syntax, idioms, and toolkits. 
-<br> 
-**(3)** It's not so much about which language is better than another, but about being able to project one's perception of the problem *soundly* onto the target language. 
-<br>
-<br>
 Deterministic algorithms, the subject of this project, require meticulous state manipulations in its very nature. The dryness of [this](https://github.com/vkostyukov/scalacaster) popular open-source project just shows how difficult it is to devise a purely functional algorithm and its associated data structure that is intellectually pleasing and yet, still performant.
 <br>
 <br>
