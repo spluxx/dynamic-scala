@@ -61,7 +61,7 @@ class TopoSortSpec extends FlatSpec with Matchers {
   }
 
   "toposort" should "accurately compute the topological order" in {
-    val testCase = loadResource("toposort/ts2.in")
+    val testCase = loadResource("toposort/ts1.in")
     val soln = topoSort(testCase._1, testCase._2)
     check(Graph.makeGraph(testCase._1, testCase._2), soln) should be(true)
   }
@@ -81,6 +81,30 @@ class TopoSortSpec extends FlatSpec with Matchers {
   it should "accurately compute the topological order (4)" in {
     val testCase = loadResource("toposort/ts5.in")
     val soln = topoSort(testCase._1, testCase._2)
+    check(Graph.makeGraph(testCase._1, testCase._2), soln) should be(true)
+  }
+
+  "stateToposort" should "accurately compute the topological order" in {
+    val testCase = loadResource("toposort/ts1.in")
+    val soln = stateTopoSort(testCase._1, testCase._2)
+    check(Graph.makeGraph(testCase._1, testCase._2), soln) should be(true)
+  }
+
+  it should "accurately compute the topological order (2)" in {
+    val testCase = loadResource("toposort/ts3.in")
+    val soln = stateTopoSort(testCase._1, testCase._2)
+    check(Graph.makeGraph(testCase._1, testCase._2), soln) should be(true)
+  }
+
+  it should "accurately compute the topological order (3)" in {
+    val testCase = loadResource("toposort/ts4.in")
+    val soln = stateTopoSort(testCase._1, testCase._2)
+    check(Graph.makeGraph(testCase._1, testCase._2), soln) should be(true)
+  }
+
+  it should "accurately compute the topological order (4)" in {
+    val testCase = loadResource("toposort/ts5.in")
+    val soln = stateTopoSort(testCase._1, testCase._2)
     check(Graph.makeGraph(testCase._1, testCase._2), soln) should be(true)
   }
 }

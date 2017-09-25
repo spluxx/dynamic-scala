@@ -33,6 +33,9 @@ object TopoSortBench extends Bench.LocalTime {
       edgeBuff.result().toList.map(p => Edge(Node(p._1), Node(p._2), ()))
   }
 
+  def ts3: Gen[(List[Node[String]], List[Edge[String, Unit]])] = Gen.single("ts3") {
+    loadResource("toposort/ts4.in")
+  }
 
   def ts4: Gen[(List[Node[String]], List[Edge[String, Unit]])] = Gen.single("ts4") {
     loadResource("toposort/ts4.in")
@@ -44,6 +47,16 @@ object TopoSortBench extends Bench.LocalTime {
 
   performance of "Search" in {
     measure method "toposort" in {
+      using(ts3) config (
+        exec.benchRuns -> 5
+        ) in { case (nodes, edges) =>
+        topoSort(nodes, edges)
+      }
+    }
+  }
+
+  performance of "Search" in {
+    measure method "toposort(2)" in {
       using(ts4) config (
         exec.benchRuns -> 5
       ) in { case (nodes, edges) =>
@@ -53,11 +66,41 @@ object TopoSortBench extends Bench.LocalTime {
   }
 
   performance of "Search" in {
-    measure method "toposort(2)" in {
+    measure method "toposort(3)" in {
       using(ts5) config (
         exec.benchRuns -> 5
         ) in { case (nodes, edges) =>
         topoSort(nodes, edges)
+      }
+    }
+  }
+
+  performance of "Search" in {
+    measure method "toposort" in {
+      using(ts3) config (
+        exec.benchRuns -> 5
+        ) in { case (nodes, edges) =>
+        stateTopoSort(nodes, edges)
+      }
+    }
+  }
+
+  performance of "Search" in {
+    measure method "toposort(2)" in {
+      using(ts4) config (
+        exec.benchRuns -> 5
+        ) in { case (nodes, edges) =>
+        stateTopoSort(nodes, edges)
+      }
+    }
+  }
+
+  performance of "Search" in {
+    measure method "toposort(3)" in {
+      using(ts5) config (
+        exec.benchRuns -> 5
+        ) in { case (nodes, edges) =>
+        stateTopoSort(nodes, edges)
       }
     }
   }

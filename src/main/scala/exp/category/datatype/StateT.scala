@@ -25,7 +25,7 @@ object StateT {
   def set[F[_]: Monad, S](s: S): StateT[F, S, Unit] =
     StateT(_ => Monad.pure[(S, Unit), F]((s, ())))
 
-  def state[F[_]: Monad, S]: StateT[F, S, S] =
+  def get[F[_]: Monad, S]: StateT[F, S, S] =
     StateT(s => Monad.pure[(S, S), F]((s, s)))
 
   type State[S, A] = StateT[Id, S, A]
@@ -40,6 +40,6 @@ object State {
   def set[S](s: S): State[S, Unit] =
     State(_ => (s, ()))
 
-  def state[S]: State[S, S] =
+  def get[S]: State[S, S] =
     State(s => (s, s))
 }
