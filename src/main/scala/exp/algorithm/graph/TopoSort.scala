@@ -6,6 +6,7 @@ import exp.category.datatype.StateT.State
 import exp.structure.typeclass.Graph._
 import exp.structure.typeclass.{Edge, Graph, Node}
 
+import scala.annotation.tailrec
 import scala.collection.immutable.Queue
 import scala.language.higherKinds
 
@@ -69,6 +70,7 @@ trait TopoSort {
       }
     }
 
+    @tailrec
     def steps(s: S)(stm: State[S, Boolean]): List[I] = {
       stm.eval(s) match {
         case ((outCount, leaves, sorted), true) => steps(outCount, leaves, sorted)(stm)

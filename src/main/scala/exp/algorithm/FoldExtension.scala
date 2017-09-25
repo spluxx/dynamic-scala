@@ -1,5 +1,7 @@
 package exp.algorithm
 
+import scala.annotation.tailrec
+
 trait FoldExtension {
   def init[T1](t1: T1): Suspend1[T1] =
     Suspend1(t1)
@@ -16,7 +18,8 @@ trait FoldExtension {
   case class Next[T](next: T) extends Control[T]
   case object Break extends Control[Nothing]
 
-  def recurse[T](t: T)(f: T => Control[T]): T = {
+  @tailrec
+  final def recurse[T](t: T)(f: T => Control[T]): T = {
     f(t) match {
       case Next(nt) => recurse(nt)(f)
       case Break => t
