@@ -17,8 +17,9 @@ Deterministic algorithms, the subject of this project, require meticulous state 
 <br>
 <br>
 Hence the `FoldExtension`. <br>
-It encapsulates a small snippet of imperative style code within a functional context in a performant and comprehensive way.<br> *Note: State monads should be prefered when devising a set of state operations to be composed with each other.<br> FoldExtension, on the other hand, should be prefered when handling a single state-intensive task)<br>
+It encapsulates a small snippet of imperative style code within a functional context in a performant and comprehensive way.<br> *Note: State monads should be prefered when devising a set of state operations to be composed with each other.<br> FoldExtension, on the other hand, should be prefered when handling a single but iterative state mutating task)<br>
 ##### loop over collections
+`C++`
 ```C++
 // (1) Declare initial state values
 int fibHead = 1;
@@ -31,6 +32,7 @@ for(int i = 2 ; i <= N ; i ++) {
   fibTail = t;
 }
 ```
+`Scala`
 ```scala
 val (fibTail, fibHead): (Int, Int) = 
 // (1) Declare initial state values
@@ -46,6 +48,7 @@ The type signature is(disregarding syntactical components) equivalent to that of
 T => TraversableOnce[U] => ((T, U) => T) => T
 ```
 ##### loop until Break
+`C++`
 ```C++
 // (1) Declare initial state values
 double sq = square;
@@ -57,6 +60,7 @@ while(true) {
   else break;
 }
 ```
+`Scala`
 ```scala
 val (sq, sqrt) = 
 // (1) Declare initial state values
