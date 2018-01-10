@@ -21,12 +21,9 @@ It encapsulates a small snippet of imperative style code within a functional con
 ##### loop over collections
 `C++`
 ```C++
-// (1) Declare initial state values
 int fibHead = 1;
 int fibTail = 1;
-// (2) Declare what to loop on
 for(int i = 2 ; i <= N ; i ++) {
-// (3) Update State on each loop
   int t = fibHead;
   fibHead += fibTail;
   fibTail = t;
@@ -35,11 +32,8 @@ for(int i = 2 ; i <= N ; i ++) {
 `Scala`
 ```scala
 val (fibTail, fibHead): (Int, Int) = 
-// (1) Declare initial state values
   init(1, 1)
-// (2) Declare what to loop on
     .loop(2 to N) { (fibTail, fibHead, _) =>
-// (3) Update State on each loop
       (fibHead, fibHead+fibTail)
     }
 ```
@@ -50,12 +44,9 @@ T => TraversableOnce[U] => ((T, U) => T) => T
 ##### loop until Break
 `C++`
 ```C++
-// (1) Declare initial state values
 double sq = square;
 double sqrt = 1.0;
-// (2) loop
 while(true) {
-// (3) Update State on each loop, until break is reached
   if(abs((sqrt*sqrt-sq)/sq) > 1e-6) sqrt = ((sq/sqrt)+sqrt)/2;
   else break;
 }
@@ -63,11 +54,8 @@ while(true) {
 `Scala`
 ```scala
 val (sq, sqrt) = 
-// (1) Declare initial state values
   init(square, 1.0)
-// (2) loop  
     .loop { (x, y) =>
-// (3) Update State on each loop, until break is reached
       if(math.abs((y*y-x)/x) > 1e-6) Next(x, ((x/y)+y)/2)
       else Break
     }
